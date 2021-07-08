@@ -33,7 +33,7 @@ public class CoinManager : MonoBehaviour
     void Start()
     {
 
-        coinCointText.text = CoinCount.ToString();
+        coinCointText.text = "Count: " + CoinCount.ToString();
     }
 
 
@@ -46,14 +46,14 @@ public class CoinManager : MonoBehaviour
     {
         Debug.Log($"Попытка добавить монету.");
         CoinCount++;
-        coinCointText.text = CoinCount.ToString();
+        coinCointText.text = "Count: " + CoinCount.ToString();
     }
 
     public void ResetCoin()
     {
         CoinCount = 0;
         Debug.Log("Сброс значений");
-        coinCointText.text = CoinCount.ToString();
+        coinCointText.text = "Count: " + CoinCount.ToString();
     }
 
 }
