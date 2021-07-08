@@ -6,6 +6,10 @@ public class CoinManager : MonoBehaviour
     [SerializeField]
     Text coinCointText;
 
+    public Sprite[] CoinSprites;
+
+    public Coin[] CoinArrayWithProperties;
+
     private float coinCount = 0;
 
     
@@ -32,6 +36,22 @@ public class CoinManager : MonoBehaviour
 
     void Start()
     {
+        if (CoinSprites.Length > 0)
+        {
+            Coin[] CoinArrayWithProperties = new Coin[CoinSprites.Length];
+            Debug.Log("Good! CoinArrayWithProperties " + CoinArrayWithProperties.Length);
+            for (int i = 0; i < CoinArrayWithProperties.Length; i++)
+            {
+
+                //Нужно создать экземпляры Coin с заполненными полями и добавить их в Coin Grid
+
+                //CoinArrayWithProperties[i] = Coin.
+            }
+
+        }
+        else
+            Debug.Log("You need to add coin sprites to the array in CoinManager!");
+            
 
         coinCointText.text = "Count: " + CoinCount.ToString();
     }
@@ -42,10 +62,10 @@ public class CoinManager : MonoBehaviour
         
     }
 
-    public void IncreaseCoin()
+    public void IncreaseCoin(float numberOfCoins)
     {
         Debug.Log($"Попытка добавить монету.");
-        CoinCount++;
+        CoinCount  += numberOfCoins;
         coinCointText.text = "Count: " + CoinCount.ToString();
     }
 
@@ -57,3 +77,17 @@ public class CoinManager : MonoBehaviour
     }
 
 }
+
+/*
+ *  + 1. Массив спрайтов. Загружаем массив спрайтов, у каждого спрайта своё уникальное имя
+ * 
+ *  + 2. Создаём класс Coin который имеет поля: 
+ *      - имя; 
+ *      - количество монет; 
+ *      - спрайт для загрузки картинки;
+ *      - индекс, для определения порядка в массиве.
+ *      
+ * 3. Массив Монет со свойствами. Создаём массив элементов Coin с длиной равной длине массива спрайт п.1
+ * 
+ * 4. При старте игры заполняем Coin Grid нашими монетами Coin согласно п. 3
+ */

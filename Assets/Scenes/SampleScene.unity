@@ -834,12 +834,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1765091395}
         m_MethodName: IncreaseCoin
-        m_Mode: 1
+        m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 0
+          m_FloatArgument: 1
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -2957,7 +2957,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Wallet 1
+  m_Text: 'Wallet
 
 
 '
@@ -3796,6 +3796,7 @@ GameObject:
   - component: {fileID: 849914814}
   - component: {fileID: 849914817}
   - component: {fileID: 849914815}
+  - component: {fileID: 849914816}
   m_Layer: 5
   m_Name: Coin
   m_TagString: Untagged
@@ -3855,6 +3856,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &849914816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 849914813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1f6bb77523ca734397515c9bfbe42fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CoinImage: {fileID: 522480683}
+  coinIndexInArray: 0
+  coinCount: 0
 --- !u!222 &849914817
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6463,7 +6479,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 20
+    m_FontSize: 25
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
@@ -6474,7 +6490,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: +1
+  m_Text: +
 --- !u!222 &1563966656
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7430,6 +7446,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinCointText: {fileID: 830610198}
+  CoinSprites:
+  - {fileID: 21300000, guid: 1af98b4b02b034644bba199fe8261649, type: 3}
+  - {fileID: 3840728530999671940, guid: 189b4e090072d4c479a255b134d0e904, type: 3}
+  - {fileID: -3617158717195926810, guid: 189b4e090072d4c479a255b134d0e904, type: 3}
+  - {fileID: -999122272813794138, guid: 189b4e090072d4c479a255b134d0e904, type: 3}
+  - {fileID: 2549434017906985729, guid: 189b4e090072d4c479a255b134d0e904, type: 3}
+  - {fileID: 1769423797774919080, guid: 189b4e090072d4c479a255b134d0e904, type: 3}
+  - {fileID: 6413771917921359991, guid: 189b4e090072d4c479a255b134d0e904, type: 3}
+  - {fileID: -7274030955522722090, guid: 189b4e090072d4c479a255b134d0e904, type: 3}
+  - {fileID: -2307707293642278719, guid: 189b4e090072d4c479a255b134d0e904, type: 3}
+  - {fileID: -5827802645533838218, guid: 189b4e090072d4c479a255b134d0e904, type: 3}
+  - {fileID: 8154072812983983023, guid: 189b4e090072d4c479a255b134d0e904, type: 3}
+  CoinArrayWithProperties: []
 --- !u!4 &1765091396
 Transform:
   m_ObjectHideFlags: 0
@@ -8281,8 +8310,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1408652323}
   m_HandleRect: {fileID: 1408652322}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.5882353
+  m_Value: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
