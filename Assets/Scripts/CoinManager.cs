@@ -10,29 +10,12 @@ public class CoinManager : MonoBehaviour
 
     public Coin[] CoinArrayWithProperties;
 
-    private float coinCount = 0;
+    [SerializeField] Transform parentCoin;
+    [SerializeField] Coin prefabCoin;
 
-    
 
     [HideInInspector]
-    public float CoinCount
-    {
-        get
-        {
-            return PlayerPrefs.GetFloat("coinCount");
-        }
-        set
-        {
-            if (value >= 0)
-            {
-                PlayerPrefs.SetFloat("coinCount", value);
-            }
-            else
-            {
-                Debug.LogError("gold is negative!");
-            }
-        }
-    }
+   
 
     void Start()
     {
@@ -42,18 +25,22 @@ public class CoinManager : MonoBehaviour
             Debug.Log("Good! CoinArrayWithProperties " + CoinArrayWithProperties.Length);
             for (int i = 0; i < CoinArrayWithProperties.Length; i++)
             {
-
                 //Нужно создать экземпляры Coin с заполненными полями и добавить их в Coin Grid
+                Coin coin = Instantiate(prefabCoin);
+                coin.transform.SetParent(parentCoin);
+                coin.transform.localScale= new Vector2(1f, 1f);
 
-                //CoinArrayWithProperties[i] = Coin.
+                //Заполняем поля Экземпляров Coin считав данные со спрайтов из массива CoinSprites
+                coin.CoinImage.sprite = CoinSprites[i];
+                coin.coinIndexInArray = i;
+                coin.Name = CoinSprites[i].name;
+                coin.coinCountText.text = "Count: " + coin.CoinCount.ToString();
             }
 
         }
         else
             Debug.Log("You need to add coin sprites to the array in CoinManager!");
             
-
-        coinCointText.text = "Count: " + CoinCount.ToString();
     }
 
 
@@ -62,19 +49,19 @@ public class CoinManager : MonoBehaviour
         
     }
 
-    public void IncreaseCoin(float numberOfCoins)
-    {
-        Debug.Log($"Попытка добавить монету.");
-        CoinCount  += numberOfCoins;
-        coinCointText.text = "Count: " + CoinCount.ToString();
-    }
+    //public void SetCoinCount(float coinCount, Coin coin)
+    //{
+    //    Debug.Log($"Попытка добавить монету.");
+    //    coin.coinCount += coinCount;
+    //    coin.coinCointText.text = "Count: " + coin.CoinCount.ToString();
+    //}
 
-    public void ResetCoin()
-    {
-        CoinCount = 0;
-        Debug.Log("Сброс значений");
-        coinCointText.text = "Count: " + CoinCount.ToString();
-    }
+    //public void SetZeroCoin(Coin coin)
+    //{
+    //    coin.CoinCount = 0;
+    //    Debug.Log("Сброс значениz монеты");
+    //    coinCointText.text = "Count: " + coin.CoinCount.ToString();
+    //}
 
 }
 
