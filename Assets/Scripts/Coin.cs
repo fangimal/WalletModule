@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
+
+[Serializable]
 public class Coin : MonoBehaviour
 {
     public Text coinCountText;
@@ -11,7 +14,11 @@ public class Coin : MonoBehaviour
     public float coinCount = 0f;
 
     [SerializeField]    private string name;
-
+    SaveSystem saveSystem;
+    private void Awake()
+    {
+        saveSystem = FindObjectOfType<SaveSystem>();
+    }
     public string Name
     {
         get
@@ -28,13 +35,13 @@ public class Coin : MonoBehaviour
     {
         get
         {
-            return PlayerPrefs.GetFloat(Name);
+            return saveSystem.Load(Name, coinIndexInArray);
         }
         set
         {
             if (value >= 0)
             {
-                PlayerPrefs.SetFloat(Name, value);
+                saveSystem.Save(Name, value, coinIndexInArray);
             }
             else
             {
@@ -61,7 +68,6 @@ public class Coin : MonoBehaviour
     }
     public void SetCoinCount(float _coinCount)
     {
-        Debug.Log($"Попытка добавить монету.");
         CoinCount += _coinCount;
         coinCountText.text = "Count: " + CoinCount.ToString();
     }
@@ -69,7 +75,7 @@ public class Coin : MonoBehaviour
     public void SetZeroCoin()
     {
         CoinCount = 0;
-        Debug.Log("Сброс значениz монеты");
+        Debug.Log("Сброс значения монеты");
         coinCountText.text = "Count: " + CoinCount.ToString();
     }
 }
