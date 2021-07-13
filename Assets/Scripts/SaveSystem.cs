@@ -11,7 +11,8 @@ public class SaveSystem : MonoBehaviour
     public enum SaveMethod
     {
         playerPref,
-        binary
+        binary,
+        json
     }
     public SaveMethod saveMethod;
 
@@ -24,9 +25,15 @@ public class SaveSystem : MonoBehaviour
     private void Awake()
     {
         pathToSaveFile = Path.Combine(Application.dataPath, saveFilename);
-        if (File.Exists(pathToSaveFile))
+
+        if (saveMethod == SaveMethod.binary && File.Exists(pathToSaveFile))
         {
             coinDataList = BinarySerializer.Deserialize<CoinDataList>(pathToSaveFile);
+            fileCreateAndSave = true;
+        }
+        else if (saveMethod == SaveMethod.json && File.Exists(pathToSaveFile))
+        {
+            coinDataList = JsonUtility.FromJson<CoinDataList>(File.ReadAllText(pathToSaveFile));
             fileCreateAndSave = true;
         }
     }
@@ -36,7 +43,15 @@ public class SaveSystem : MonoBehaviour
     }
     private void OnApplicationQuit()
     {
-        BinarySerializer.Serialize(pathToSaveFile, coinDataList);
+        if (saveMethod == SaveMethod.binary)
+        {
+            BinarySerializer.Serialize(pathToSaveFile, coinDataList);
+        }
+        else if (saveMethod == SaveMethod.json)
+        {
+            string strOutput = JsonUtility.ToJson(coinDataList);
+            File.WriteAllText(pathToSaveFile, strOutput);
+        }
     }
     public void GenerateGameData()
     {
@@ -57,12 +72,9 @@ public class SaveSystem : MonoBehaviour
         }
     }
 
-
-    
-
     public void Save(string name, float value, int index)
     {
-        if (saveMethod == SaveMethod.binary)
+        if (saveMethod == SaveMethod.binary || saveMethod == SaveMethod.json)
         {
             coinDataList.coinData[index].coinCount = value;
         }
@@ -71,12 +83,12 @@ public class SaveSystem : MonoBehaviour
     }
     public float Load(string name, int index)
     {
-        if (saveMethod == SaveMethod.binary)
+        if (saveMethod == SaveMethod.binary || saveMethod == SaveMethod.json)
         {
             return coinDataList.coinData[index].coinCount;
         }
-        return PlayerPrefs.HasKey(name) ? PlayerPrefs.GetFloat(name) : 0;
-            
+
+        return PlayerPrefs.HasKey(name) ? PlayerPrefs.GetFloat(name) : 0; 
     }
 }
 
